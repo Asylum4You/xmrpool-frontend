@@ -7,8 +7,22 @@ $.ajax({
   dataType: "script"
 });
 
+$(document).ready(function () {
+  $( "#home" ).load( "/app/home.html" );
+  $( "#pool-stats" ).load( "/app/pool.html" );
+  var loaded = false;
+  while (!loaded) {
+    try {
+      setTimeout(refreshStats(), 100);
+      loaded = true;
+    } catch(err) {}
+  }
 
-setInterval(function() {
+});
+
+var refreshStats = function () {
   var network_api = new NetworkApi();
   network_api._update_network_stats();
-}, 5000);
+};
+
+setInterval(refreshStats, 5000);
