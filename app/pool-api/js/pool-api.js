@@ -80,7 +80,8 @@ $(document).ready(function () {
         var poolBlocksTable = $("#pool-blocks-table").DataTable({
             "processing": true,
             "ajax": {
-                "url": "https://api.xmrpool.net/pool/blocks"
+                "url": "https://api.xmrpool.net/pool/blocks",
+                "dataSrc": ""
             },
             "deferRender": true,
             "columns": [
@@ -142,7 +143,8 @@ $(document).ready(function () {
         var poolPaymentsTable = $("#pool-payments-table").DataTable({
             "processing": true,
             "ajax": {
-                "url": "https://api.xmrpool.net/pool/payments"
+                "url": "https://api.xmrpool.net/pool/payments",
+                "dataSrc": ""
             },
             "deferRender": true,
             "columns": [
