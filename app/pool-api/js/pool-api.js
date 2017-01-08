@@ -5,6 +5,16 @@
 var network_api = {};
 var pool_api = {};
 
+function hashConversion(hashes){
+    if(hashes > 1000000){
+        return Math.floor(hashes/1000000) + "." + (hashes % 1000000).toString().substring(0,1) + " MH/s"
+    }
+    if(hashes > 1000){
+        return Math.floor(hashes/1000) + "." + (hashes % 1000).toString().substring(0,1) + " KH/s"
+    }
+    return hashes + " H/s"
+}
+
 $.ajax({
     url: "app/pool-api/js/network.js",
     dataType: "script",
