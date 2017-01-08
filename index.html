@@ -18,28 +18,45 @@
     </button>
     <a class="navbar-brand" href="#">XMRpool.net</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs navbar-nav mr-auto">
           <li class="nav-item">
               <a class="nav-link active" data-toggle="tab" href="#home" role="tab"><span class="octicon"><img
                       src="/libs/node_modules/octicons/build/svg/home.svg"/></span> Home</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#pool-stats" role="tab"><span class="octicon"><img
+              <a class="nav-link disabled" data-toggle="tab" href="#pool-stats" role="tab"><span class="octicon"><img
                       src="/libs/node_modules/octicons/build/svg/eye.svg"/></span> Pool Stats</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#network-stats" role="tab"><span class="octicon"><img
+              <a class="nav-link disabled" data-toggle="tab" href="#network-stats" role="tab"><span class="octicon"><img
                       src="/libs/node_modules/octicons/build/svg/globe.svg"/></span> Network Stats</a>
+          </li>
+	  <li class="nav-item">
+	    <a class="nav-link disabled" data-toggle="tab" href="#miner-stats" role="tab">
+	      <span class="octicon"><img src="/libs/node_modules/octicons/build/svg/organization.svg"/></span>
+	      Miner Stats
+            </a>
           </li>
           <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#pool-getting-started" role="tab"><span class="octicon"><img
                       src="/libs/node_modules/octicons/build/svg/beaker.svg"/></span> Pool Ports</a>
           </li>
       </ul>
+      <div id="div-address-form" class="my-2 my-lg-0">
+        <form id="address-form" class="form-inline my-2 my-lg-0">
+  	<input class="form control mr-sm-2" type="text" placeholder="Address" name="address">
+  	<div class="form-check mb-2 mr-sm-2 mb-sm-0">
+  	  <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="remember" /> Remember
+            </label>
+  	</div>
+  	<button class="btn btn-outline-primary my-2 my-sm-0" type="Submit">Go</button>
+        </form>
+      </div>
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
     <div class="tab-content">
 
         <div class="tab-pane fade show active" id="home" role="tabpanel">
@@ -56,6 +73,8 @@
                     <h1>Network Stats</h1>
                 </div>
             </div>
+        </div>
+        <div class="tab-pane fade" id="miner-stats" role="tabpanel">
         </div>
 
         <div class="tab-pane fade" id="pool-getting-started" role="tabpanel">

@@ -60,7 +60,7 @@ $.ajax({
             pool_api = new PoolApi();
         }, 100);
     }
-})
+});
 
 $.ajax({
     url: "app/pool-api/js/miner.js",
@@ -70,7 +70,8 @@ $.ajax({
             miner_api = new MinerApi();
         }, 100);
     }
-})
+});
+
 $(document).ready(function () {
     $("#home").load("/app/home.html");
     $("#pool-stats").load("/app/pool.html");
