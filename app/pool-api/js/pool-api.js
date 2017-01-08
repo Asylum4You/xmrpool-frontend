@@ -6,36 +6,45 @@ var network_api = {};
 var pool_api = {};
 
 $.ajax({
-  url: "app/pool-api/js/network.js",
-  dataType: "script",
-  success: function () {
-    setTimeout(function() { network_api = new NetworkApi(); }, 100);
-  }
+    url: "app/pool-api/js/network.js",
+    dataType: "script",
+    success: function () {
+        setTimeout(function () {
+            network_api = new NetworkApi();
+        }, 100);
+    }
 });
 
 $.ajax({
     url: "app/pool-api/js/pool.js",
     dataType: "script",
     success: function () {
-        setTimeout(function() { pool_api = new PoolApi(); }, 100);
+        setTimeout(function () {
+            pool_api = new PoolApi();
+        }, 100);
     }
 });
 
 $(document).ready(function () {
-  $( "#home" ).load( "/app/home.html" );
-  $( "#pool-stats" ).load( "/app/pool.html" );
-  $( "#pool-getting-started" ).load( "/app/gettingStarted.html" );
-  setTimeout(refreshStats5Sec, 500);
-  setTimeout(refreshStats60Sec, 500);
+    $("#home").load("/app/home.html");
+    $("#pool-stats").load("/app/pool.html");
+    $("#pool-getting-started").load("/app/gettingStarted.html");
+    $("#pool-ports-table-pps").DataTable();
+    $("#pool-ports-table-pplns").DataTable();
+    $("#pool-ports-table-solo").DataTable();
+    $("#pool-ports-table-global").DataTable();
+
+    setTimeout(refreshStats5Sec, 500);
+    setTimeout(refreshStats60Sec, 500);
 });
 
 
 var refreshStats5Sec = function () {
-  network_api._update_network_stats();
-  pool_api._update_pool_stats();
+    network_api._update_network_stats();
+    pool_api._update_pool_stats();
 };
 
-var refreshStats60Sec = function(){
+var refreshStats60Sec = function () {
     pool_api._update_pool_ports();
 };
 
