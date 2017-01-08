@@ -110,7 +110,7 @@ $(document).ready(function () {
                     "data": "hash",
                     "render": function (data, type, row) {
                         if (type === 'display' || type === 'filter') {
-                            return '<a href="http://chainradar.com/xmr/block/' + data + '" target="_blank">' + html.hash.substring(0, 13) + '...</a>';
+                            return '<a href="http://chainradar.com/xmr/block/' + data + '" target="_blank">' + data.substring(0, 13) + '...</a>';
                         }
                         return data;
                     }
@@ -158,7 +158,7 @@ $(document).ready(function () {
                     "data": "hash",
                     "render": function (data, type, row) {
                         if (type === 'display' || type === 'filter') {
-                            return '<a href="http://chainradar.com/xmr/transaction/' + data + '" target="_blank">' + html.hash.substring(0, 13) + '...</a>';
+                            return '<a href="http://chainradar.com/xmr/transaction/' + data + '" target="_blank">' + data.substring(0, 13) + '...</a>';
                         }
                         return data;
                     }
