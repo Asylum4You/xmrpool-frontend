@@ -92,6 +92,7 @@ $(document).ready(function () {
                 "url": "https://api.xmrpool.net/pool/blocks",
                 "dataSrc": ""
             },
+            "order": [[ 4, 'desc' ]],
             "deferRender": true,
             "columns": [
                 {
@@ -99,7 +100,7 @@ $(document).ready(function () {
                 },
                 {
                     "data": "diff",
-                    "render": function (data, type, row) {
+                    "render": function (data, type) {
                         if (type === 'display' || type === 'filter') {
                             return Humanize.intComma(data);
                         }
@@ -108,7 +109,7 @@ $(document).ready(function () {
                 },
                 {
                     "data": "shares",
-                    "render": function (data, type, row) {
+                    "render": function (data, type) {
                         if (type === 'display' || type === 'filter') {
                             return Humanize.intComma(data);
                         }
@@ -117,7 +118,7 @@ $(document).ready(function () {
                 },
                 {
                     "data": "hash",
-                    "render": function (data, type, row) {
+                    "render": function (data, type) {
                         if (type === 'display' || type === 'filter') {
                             return '<a href="http://chainradar.com/xmr/block/' + data + '" target="_blank">' + data.substring(0, 13) + '...</a>';
                         }
@@ -132,7 +133,7 @@ $(document).ready(function () {
                 },
                 {
                     "data": "pool_type",
-                    "render": function (data, type, row) {
+                    "render": function (data) {
                         return data.toUpperCase();
                     }
                 },
@@ -155,6 +156,7 @@ $(document).ready(function () {
                 "url": "https://api.xmrpool.net/pool/payments",
                 "dataSrc": ""
             },
+            "order": [[ 0, 'desc' ]],
             "deferRender": true,
             "columns": [
                 {
@@ -165,7 +167,7 @@ $(document).ready(function () {
                 },
                 {
                     "data": "hash",
-                    "render": function (data, type, row) {
+                    "render": function (data, type) {
                         if (type === 'display' || type === 'filter') {
                             return '<a href="http://chainradar.com/xmr/transaction/' + data + '" target="_blank">' + data.substring(0, 13) + '...</a>';
                         }
@@ -174,7 +176,7 @@ $(document).ready(function () {
                 },
                 {
                     "data": "value",
-                    "render": function (data, type, row) {
+                    "render": function (data, type) {
                         if (type === 'display' || type === 'filter') {
                             return (data / 1000000000000).toString().trim('0') + " XMR";
                         }
@@ -183,7 +185,7 @@ $(document).ready(function () {
                 },
                 {
                     "data": "fee",
-                    "render": function (data, type, row) {
+                    "render": function (data, type) {
                         if (type === 'display' || type === 'filter') {
                             return (data / 1000000000000).toString().trim('0') + " XMR";
                         }
@@ -194,7 +196,7 @@ $(document).ready(function () {
                 {"data": "payees"},
                 {
                     "data": "pool_type",
-                    "render": function (data, type, row) {
+                    "render": function (data) {
                         return data.toUpperCase();
                     }
                 }
@@ -209,7 +211,7 @@ $(document).ready(function () {
     setTimeout(pageInit, 500)
 });
 
-function timeRender(data, type, row) {
+function timeRender(data, type) {
     if (type === 'display' || type === 'filter') {
         var d = moment.utc(data * 1000);
         return d.format('L') + " " + d.format('HH:mm:ss') + " UTC"
@@ -217,7 +219,7 @@ function timeRender(data, type, row) {
     return data;
 }
 
-function timeRenderuSec(data, type, row) {
+function timeRenderuSec(data, type) {
     if (type === 'display' || type === 'filter') {
         var d = moment.utc(data);
         return d.format('L') + " " + d.format('HH:mm:ss') + " UTC"
