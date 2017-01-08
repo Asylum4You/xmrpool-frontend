@@ -69,32 +69,32 @@ $(document).ready(function () {
     $("#pool-stats").load("/app/pool.html");
     $("#pool-getting-started").load("/app/gettingStarted.html");
     $("#pool-ports-table-pps").DataTable({
-        processing: true,
-        ajax: "https://api.xmrpool.net/pool/ports/",
-        deferRender: true,
-        dataSrc: 'pps',
-        columns: portColumns
+        "processing": true,
+        "ajax": "https://api.xmrpool.net/pool/ports/",
+        "deferRender": true,
+        "dataSrc": 'pps',
+        "columns": portColumns
     });
     $("#pool-ports-table-pplns").DataTable({
-        processing: true,
-        ajax: "https://api.xmrpool.net/pool/ports/",
-        deferRender: true,
-        dataSrc: 'pplns',
-        columns: portColumns
+        "processing": true,
+        "ajax": "https://api.xmrpool.net/pool/ports/",
+        "deferRender": true,
+        "dataSrc": 'pplns',
+        "columns": portColumns
     });
     $("#pool-ports-table-solo").DataTable({
-        processing: true,
-        ajax: "https://api.xmrpool.net/pool/ports/",
-        deferRender: true,
-        dataSrc: 'solo',
-        columns: portColumns
+        "processing": true,
+        "ajax": "https://api.xmrpool.net/pool/ports/",
+        "deferRender": true,
+        "dataSrc": 'solo',
+        "columns": portColumns
     });
     $("#pool-ports-table-global").DataTable({
-        processing: true,
-        ajax: "https://api.xmrpool.net/pool/ports/",
-        deferRender: true,
-        dataSrc: 'global',
-        columns: portColumnsGlobal
+        "processing": true,
+        "ajax": "https://api.xmrpool.net/pool/ports/",
+        "deferRender": true,
+        "dataSrc": 'global',
+        "columns": portColumnsGlobal
     });
 
     setTimeout(refreshStats5Sec, 500);
@@ -108,4 +108,3 @@ var refreshStats5Sec = function () {
 
 
 setInterval(refreshStats5Sec, 5000);
-setInterval(refreshStats60Sec, 60000);
