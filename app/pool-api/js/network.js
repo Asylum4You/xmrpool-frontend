@@ -13,7 +13,7 @@ NetworkApi.prototype._update_network_stats = function () {
                 $('#network-difficulty').html(html.difficulty);
                 $('#network-hash-rate').html(hashConversion(Math.floor(html.difficulty / 120)));
                 $('#network-last-hash').html('<a href="http://chainradar.com/xmr/block/' + html.hash + '" target="_blank">' + html.hash.substring(0, 13) + '...</a>');
-                $('#network-reward').html((html.value / 1000000000000).toPrecision(13) + " XMR");
+                $('#network-reward').html((html.value / 1000000000000).toString().trim('0') + " XMR");
                 $('#network-timestamp').html(timeSince(html.ts*1000) + " ago");
             }
         }
