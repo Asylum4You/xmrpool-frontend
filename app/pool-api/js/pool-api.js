@@ -303,5 +303,4 @@ var refreshStats5Sec = function () {
     pool_api._update_pool_stats();
 };
 
-
 setInterval(refreshStats5Sec, 5000);
