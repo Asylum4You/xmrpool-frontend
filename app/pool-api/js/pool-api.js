@@ -33,6 +33,25 @@ $(document).ready(function () {
     setTimeout(refreshStats5Sec, 500);
 });
 
+var portColumns = [
+    {"data": "host.hostname"},
+    {"data": "port"},
+    {"data": "difficulty"},
+    {"data": "description"},
+    {"data": "miners"},
+    {"data": "host.blockID"},
+    {
+        "data": "host.blockIDTime",
+        "render": function (data, type, row) {
+            if (type === 'display' || type === 'filter') {
+                var d = new Date(data * 1000);
+                return d.toString();
+            }
+            return data;
+        }
+    }
+];
+
 var initTables = function () {
     $("#pool-ports-table-pps").DataTable({
         "processing": true,
@@ -41,24 +60,9 @@ var initTables = function () {
             "dataSrc": "pps"
         },
         "deferRender": true,
-        "columns": [
-            {"data": "host.hostname"},
-            {"data": "port"},
-            {"data": "difficulty"},
-            {"data": "description"},
-            {"data": "miners"},
-            {"data": "host.blockID"},
-            {
-                "data": "host.blockIDTime",
-                "render": function (data, type, row) {
-                    if (type === 'display' || type === 'filter') {
-                        var d = new Date(data * 1000);
-                        return d.toISOString();
-                    }
-                    return data;
-                }
-            }
-        ]
+        "searching": false,
+        "paging": false,
+        "columns": portColumns
     });
     $("#pool-ports-table-pplns").DataTable({
         "processing": true,
@@ -67,24 +71,9 @@ var initTables = function () {
             "dataSrc": "pplns"
         },
         "deferRender": true,
-        "columns": [
-            {"data": "host.hostname"},
-            {"data": "port"},
-            {"data": "difficulty"},
-            {"data": "description"},
-            {"data": "miners"},
-            {"data": "host.blockID"},
-            {
-                "data": "host.blockIDTime",
-                "render": function (data, type, row) {
-                    if (type === 'display' || type === 'filter') {
-                        var d = new Date(data * 1000);
-                        return d.toISOString();
-                    }
-                    return data;
-                }
-            }
-        ]
+        "searching": false,
+        "paging": false,
+        "columns": portColumns
     });
     $("#pool-ports-table-solo").DataTable({
         "processing": true,
@@ -93,32 +82,20 @@ var initTables = function () {
             "dataSrc": "solo"
         },
         "deferRender": true,
-        "columns": [
-            {"data": "host.hostname"},
-            {"data": "port"},
-            {"data": "difficulty"},
-            {"data": "description"},
-            {"data": "miners"},
-            {"data": "host.blockID"},
-            {
-                "data": "host.blockIDTime",
-                "render": function (data, type, row) {
-                    if (type === 'display' || type === 'filter') {
-                        var d = new Date(data * 1000);
-                        return d.toISOString();
-                    }
-                    return data;
-                }
-            }
-        ]
+        "searching": false,
+        "paging": false,
+        "columns": portColumns
     });
     $("#pool-ports-table-global").DataTable({
+        "paging": false,
         "processing": true,
         "ajax": {
             "url": "https://api.xmrpool.net/pool/ports",
             "dataSrc": "global"
         },
         "deferRender": true,
+        "searching": false,
+        "paging": false,
         "columns":[
             {"data": "host.hostname"},
             {"data": "port"},
@@ -132,7 +109,7 @@ var initTables = function () {
                 "render": function (data, type, row) {
                     if (type === 'display' || type === 'filter') {
                         var d = new Date(data * 1000);
-                        return d.toISOString();
+                        return d.toString();
                     }
                     return data;
                 }
