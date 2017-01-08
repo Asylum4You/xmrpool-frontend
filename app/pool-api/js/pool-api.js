@@ -67,6 +67,7 @@ $(document).ready(function () {
     $("#pool-getting-started").load("/app/gettingStarted.html");
     setTimeout(initTables, 2000);
     setTimeout(refreshStats5Sec, 500);
+    setTimeout(network_api._update_pool_info, 500)
 });
 
 var portColumns = [

@@ -20,3 +20,26 @@ NetworkApi.prototype._update_network_stats = function () {
     )
 };
 
+NetworkApi.prototype._update_pool_info = function () {
+    $.ajax({
+        type: "GET",
+        url: "https://api.xmrpool.net/config/",
+        cache: true,
+        dataType: 'json'
+    }).done(function (html) {
+            if (html) {
+                $('#pplns_fee').html(html.pplns_fee + " %");
+                $('#pps_fee').html(html.pps_fee + " %");
+                $('#solo_fee').html(solo_fee + " %");
+                $('#btc_fee').html(btc_fee + " %");
+                $('#min_wallet_payout').html((html.min_wallet_payout / 1000000000000).toString().trim('0') + " XMR");
+                $('#min_btc_payout').html((html.min_btc_payout / 1000000000000).toString().trim('0') + " XMR");
+                $('#maturity_depth').html(maturity_depth);
+                $('#pool_dev_donation').html(pool_dev_donation + " %");
+                $('#min_denom').html((html.min_denom / 1000000000000).toString().trim('0') + " XMR");
+                $('#min_exchange_payout').html((html.min_exchange_payout / 1000000000000).toString().trim('0') + " XMR");
+                $('#dev_donation').html((html.dev_donation / 1000000000000).toString().trim('0') + " XMR");
+            }
+        }
+    )
+};
