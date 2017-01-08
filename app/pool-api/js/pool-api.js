@@ -25,84 +25,109 @@ $.ajax({
     }
 });
 
-var portColumns = [
-    {"data": "host.hostname"},
-    {"data": "port"},
-    {"data": "difficulty"},
-    {"data": "description"},
-    {"data": "miners"},
-    {"data": "host.blockID"},
-    {
-        "data": "host.blockIDTime",
-        "render": function (data, type, row) {
-            if (type === 'display' || type === 'filter') {
-                var d = new Date(data * 1000);
-                return d.toISOString();
-            }
-            return data;
-        }
-    }
-];
-
-var portColumnsGlobal = [
-    {"data": "host.hostname"},
-    {"data": "port"},
-    {"data": "pool_type"},
-    {"data": "difficulty"},
-    {"data": "description"},
-    {"data": "miners"},
-    {"data": "host.blockID"},
-    {
-        "data": "host.blockIDTime",
-        "render": function (data, type, row) {
-            if (type === 'display' || type === 'filter') {
-                var d = new Date(data * 1000);
-                return d.toISOString();
-            }
-            return data;
-        }
-    }
-];
-
 $(document).ready(function () {
     $("#home").load("/app/home.html");
     $("#pool-stats").load("/app/pool.html");
     $("#pool-getting-started").load("/app/gettingStarted.html");
-    setTimeout(initTables, 500);
+    setTimeout(initTables, 2000);
     setTimeout(refreshStats5Sec, 500);
 });
-
 
 var initTables = function () {
     $("#pool-ports-table-pps").DataTable({
         "processing": true,
-        "ajax": "https://api.xmrpool.net/pool/ports/",
+        "ajax": "https://api.xmrpool.net/pool/ports",
         "deferRender": true,
-        "dataSrc": 'pps',
-        "columns": portColumns
+        "columns": [
+            {"pps": "host.hostname"},
+            {"pps": "port"},
+            {"pps": "difficulty"},
+            {"pps": "description"},
+            {"pps": "miners"},
+            {"pps": "host.blockID"},
+            {
+                "pps": "host.blockIDTime",
+                "render": function (data, type, row) {
+                    if (type === 'display' || type === 'filter') {
+                        var d = new Date(data * 1000);
+                        return d.toISOString();
+                    }
+                    return data;
+                }
+            }
+        ]
     });
     $("#pool-ports-table-pplns").DataTable({
         "processing": true,
-        "ajax": "https://api.xmrpool.net/pool/ports/",
+        "ajax": "https://api.xmrpool.net/pool/ports",
         "deferRender": true,
-        "dataSrc": 'pplns',
-        "columns": portColumns
+        "columns": [
+            {"pplns": "host.hostname"},
+            {"pplns": "port"},
+            {"pplns": "difficulty"},
+            {"pplns": "description"},
+            {"pplns": "miners"},
+            {"pplns": "host.blockID"},
+            {
+                "pplns": "host.blockIDTime",
+                "render": function (data, type, row) {
+                    if (type === 'display' || type === 'filter') {
+                        var d = new Date(data * 1000);
+                        return d.toISOString();
+                    }
+                    return data;
+                }
+            }
+        ]
     });
     $("#pool-ports-table-solo").DataTable({
         "processing": true,
-        "ajax": "https://api.xmrpool.net/pool/ports/",
+        "ajax": "https://api.xmrpool.net/pool/ports",
         "deferRender": true,
-        "dataSrc": 'solo',
-        "columns": portColumns
+        "columns": [
+            {"solo": "host.hostname"},
+            {"solo": "port"},
+            {"solo": "difficulty"},
+            {"solo": "description"},
+            {"solo": "miners"},
+            {"solo": "host.blockID"},
+            {
+                "solo": "host.blockIDTime",
+                "render": function (data, type, row) {
+                    if (type === 'display' || type === 'filter') {
+                        var d = new Date(data * 1000);
+                        return d.toISOString();
+                    }
+                    return data;
+                }
+            }
+        ]
     });
     $("#pool-ports-table-global").DataTable({
         "processing": true,
-        "ajax": "https://api.xmrpool.net/pool/ports/",
+        "ajax": "https://api.xmrpool.net/pool/ports",
         "deferRender": true,
-        "dataSrc": 'global',
-        "columns": portColumnsGlobal
+        "columns":[
+            {"global": "host.hostname"},
+            {"global": "port"},
+            {"global": "pool_type"},
+            {"global": "difficulty"},
+            {"global": "description"},
+            {"global": "miners"},
+            {"global": "host.blockID"},
+            {
+                "global": "host.blockIDTime",
+                "render": function (data, type, row) {
+                    if (type === 'display' || type === 'filter') {
+                        var d = new Date(data * 1000);
+                        return d.toISOString();
+                    }
+                    return data;
+                }
+            }
+        ]
     });
-}
+};
 
 var refreshStats5Sec = function () {
     network_api._update_network_stats();
