@@ -68,6 +68,12 @@ $(document).ready(function () {
     $("#home").load("/app/home.html");
     $("#pool-stats").load("/app/pool.html");
     $("#pool-getting-started").load("/app/gettingStarted.html");
+    setTimeout(initTables, 500);
+    setTimeout(refreshStats5Sec, 500);
+});
+
+
+var initTables = function () {
     $("#pool-ports-table-pps").DataTable({
         "processing": true,
         "ajax": "https://api.xmrpool.net/pool/ports/",
@@ -96,10 +102,7 @@ $(document).ready(function () {
         "dataSrc": 'global',
         "columns": portColumnsGlobal
     });
-
-    setTimeout(refreshStats5Sec, 500);
-});
-
+}
 
 var refreshStats5Sec = function () {
     network_api._update_network_stats();
