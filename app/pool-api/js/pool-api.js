@@ -44,9 +44,8 @@ var portColumns = [
         "data": "host.blockIDTime",
         "render": function (data, type, row) {
             if (type === 'display' || type === 'filter') {
-                console.log(data);
                 var d = moment.utc(data * 1000);
-                return d.format('L') + " " + d.format('LTS')
+                return d.format('L') + " " + d.format('HH:mm:ss') + " UTC"
             }
             return data;
         }
@@ -112,8 +111,8 @@ var initTables = function () {
                 "data": "host.blockIDTime",
                 "render": function (data, type, row) {
                     if (type === 'display' || type === 'filter') {
-                        var d = new Date(data * 1000);
-                        return d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + " UTC"
+                        var d = moment.utc(data * 1000);
+                        return d.format('L') + " " + d.format('HH:mm:ss') + " UTC"
                     }
                     return data;
                 }
