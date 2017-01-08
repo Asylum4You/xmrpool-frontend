@@ -36,17 +36,20 @@ $(document).ready(function () {
 var initTables = function () {
     $("#pool-ports-table-pps").DataTable({
         "processing": true,
-        "ajax": "https://api.xmrpool.net/pool/ports",
+        "ajax": {
+            "url": "https://api.xmrpool.net/pool/ports",
+            "dataSrc": "pps"
+        },
         "deferRender": true,
         "columns": [
-            {"pps": "host.hostname"},
-            {"pps": "port"},
-            {"pps": "difficulty"},
-            {"pps": "description"},
-            {"pps": "miners"},
-            {"pps": "host.blockID"},
+            {"data": "host.hostname"},
+            {"data": "port"},
+            {"data": "difficulty"},
+            {"data": "description"},
+            {"data": "miners"},
+            {"data": "host.blockID"},
             {
-                "pps": "host.blockIDTime",
+                "data": "host.blockIDTime",
                 "render": function (data, type, row) {
                     if (type === 'display' || type === 'filter') {
                         var d = new Date(data * 1000);
@@ -59,17 +62,20 @@ var initTables = function () {
     });
     $("#pool-ports-table-pplns").DataTable({
         "processing": true,
-        "ajax": "https://api.xmrpool.net/pool/ports",
+        "ajax": {
+            "url": "https://api.xmrpool.net/pool/ports",
+            "dataSrc": "pplns"
+        },
         "deferRender": true,
         "columns": [
-            {"pplns": "host.hostname"},
-            {"pplns": "port"},
-            {"pplns": "difficulty"},
-            {"pplns": "description"},
-            {"pplns": "miners"},
-            {"pplns": "host.blockID"},
+            {"data": "host.hostname"},
+            {"data": "port"},
+            {"data": "difficulty"},
+            {"data": "description"},
+            {"data": "miners"},
+            {"data": "host.blockID"},
             {
-                "pplns": "host.blockIDTime",
+                "data": "host.blockIDTime",
                 "render": function (data, type, row) {
                     if (type === 'display' || type === 'filter') {
                         var d = new Date(data * 1000);
@@ -82,17 +88,20 @@ var initTables = function () {
     });
     $("#pool-ports-table-solo").DataTable({
         "processing": true,
-        "ajax": "https://api.xmrpool.net/pool/ports",
+        "ajax": {
+            "url": "https://api.xmrpool.net/pool/ports",
+            "dataSrc": "solo"
+        },
         "deferRender": true,
         "columns": [
-            {"solo": "host.hostname"},
-            {"solo": "port"},
-            {"solo": "difficulty"},
-            {"solo": "description"},
-            {"solo": "miners"},
-            {"solo": "host.blockID"},
+            {"data": "host.hostname"},
+            {"data": "port"},
+            {"data": "difficulty"},
+            {"data": "description"},
+            {"data": "miners"},
+            {"data": "host.blockID"},
             {
-                "solo": "host.blockIDTime",
+                "data": "host.blockIDTime",
                 "render": function (data, type, row) {
                     if (type === 'display' || type === 'filter') {
                         var d = new Date(data * 1000);
@@ -105,18 +114,21 @@ var initTables = function () {
     });
     $("#pool-ports-table-global").DataTable({
         "processing": true,
-        "ajax": "https://api.xmrpool.net/pool/ports",
+        "ajax": {
+            "url": "https://api.xmrpool.net/pool/ports",
+            "dataSrc": "global"
+        },
         "deferRender": true,
         "columns":[
-            {"global": "host.hostname"},
-            {"global": "port"},
-            {"global": "pool_type"},
-            {"global": "difficulty"},
-            {"global": "description"},
-            {"global": "miners"},
-            {"global": "host.blockID"},
+            {"data": "host.hostname"},
+            {"data": "port"},
+            {"data": "pool_type"},
+            {"data": "difficulty"},
+            {"data": "description"},
+            {"data": "miners"},
+            {"data": "host.blockID"},
             {
-                "global": "host.blockIDTime",
+                "data": "host.blockIDTime",
                 "render": function (data, type, row) {
                     if (type === 'display' || type === 'filter') {
                         var d = new Date(data * 1000);
