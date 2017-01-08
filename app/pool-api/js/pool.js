@@ -35,16 +35,31 @@ PoolApi.prototype._update_pool_ports = function () {
                         if (html.hasOwnProperty(poolType)){
                             html[poolType].forEach(function(port){
                                 var blockTime = new Date(port.host.blockIDTime * 1000);
-                                $('#pool-ports-table-'+poolType).append(
-                                    "<tr><td>" + port.host.hostname +
-                                    "</td><td>" + port.port +
-                                    "</td><td>" + port.difficulty +
-                                    "</td><td>" + port.description +
-                                    "</td><td>" + port.miners +
-                                    "</td><td>" + port.host.blockID +
-                                    "</td><td>" + blockTime.toISOString() +
-                                    "</tr>"
-                                )
+                                $('#pool-ports-table-'+poolType).find("tr").remove();
+                                if(poolType === 'global'){
+                                    $('#pool-ports-table-'+poolType).append(
+                                        "<tr><td>" + port.host.hostname +
+                                        "</td><td>" + port.port +
+                                        "</td><td>" + port.portType +
+                                        "</td><td>" + port.difficulty +
+                                        "</td><td>" + port.description +
+                                        "</td><td>" + port.miners +
+                                        "</td><td>" + port.host.blockID +
+                                        "</td><td>" + blockTime.toISOString() +
+                                        "</tr>"
+                                    )
+                                } else {
+                                    $('#pool-ports-table-'+poolType).append(
+                                        "<tr><td>" + port.host.hostname +
+                                        "</td><td>" + port.port +
+                                        "</td><td>" + port.difficulty +
+                                        "</td><td>" + port.description +
+                                        "</td><td>" + port.miners +
+                                        "</td><td>" + port.host.blockID +
+                                        "</td><td>" + blockTime.toISOString() +
+                                        "</tr>"
+                                    )
+                                }
                             })
                         }
                     }
