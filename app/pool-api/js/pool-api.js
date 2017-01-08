@@ -110,7 +110,7 @@ $(document).ready(function () {
                     "data": "hash",
                     "render": function (data, type, row) {
                         if (type === 'display' || type === 'filter') {
-                            return "<a href='http://explore.moneroworld.com/block/" + data + "' target='_blank>" + data + "</a>";
+                            return '<a href="http://chainradar.com/xmr/block/' + data + '" target="_blank">' + html.hash.substring(0, 13) + '...</a>';
                         }
                         return data;
                     }
@@ -158,7 +158,7 @@ $(document).ready(function () {
                     "data": "hash",
                     "render": function (data, type, row) {
                         if (type === 'display' || type === 'filter') {
-                            return "<a href='http://explore.moneroworld.com/tx/" + data + "' target='_blank>" + data + "</a>";
+                            return '<a href="http://chainradar.com/xmr/transaction/' + data + '" target="_blank">' + html.hash.substring(0, 13) + '...</a>';
                         }
                         return data;
                     }
@@ -167,7 +167,7 @@ $(document).ready(function () {
                     "data": "value",
                     "render": function (data, type, row) {
                         if (type === 'display' || type === 'filter') {
-                            return (data / 1000000000).toString().trim('0') + " XMR";
+                            return (data / 1000000000000).toString().trim('0') + " XMR";
                         }
                         return data;
                     }
@@ -176,7 +176,7 @@ $(document).ready(function () {
                     "data": "fee",
                     "render": function (data, type, row) {
                         if (type === 'display' || type === 'filter') {
-                            return (data / 1000000000).toString().trim('0') + " XMR";
+                            return (data / 1000000000000).toString().trim('0') + " XMR";
                         }
                         return data;
                     }
