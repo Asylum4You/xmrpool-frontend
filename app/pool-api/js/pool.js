@@ -33,14 +33,14 @@ PoolApi.prototype._update_pool_ports = function () {
                 if (html) {
                     for (var poolType in html){
                         if (html.hasOwnProperty(poolType)){
+                            $('#pool-ports-table-'+poolType).find("tr:gt(0)").remove();
                             html[poolType].forEach(function(port){
                                 var blockTime = new Date(port.host.blockIDTime * 1000);
-                                $('#pool-ports-table-'+poolType).find("tr").remove();
                                 if(poolType === 'global'){
                                     $('#pool-ports-table-'+poolType).append(
                                         "<tr><td>" + port.host.hostname +
                                         "</td><td>" + port.port +
-                                        "</td><td>" + port.portType +
+                                        "</td><td>" + port.pool_type +
                                         "</td><td>" + port.difficulty +
                                         "</td><td>" + port.description +
                                         "</td><td>" + port.miners +
