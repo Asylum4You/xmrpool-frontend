@@ -33,7 +33,8 @@ PoolApi.prototype._update_pool_ports = function () {
                 if (html) {
                     for (var poolType in html){
                         if (html.hasOwnProperty(poolType)){
-                            $('#pool-ports-table-'+poolType).find("tr:gt(0)").remove();
+                            $('#pool-ports-table-'+poolType).find("tbody").remove();
+                            $('#pool-ports-table-'+poolType).append("<tbody>");
                             html[poolType].forEach(function(port){
                                 var blockTime = new Date(port.host.blockIDTime * 1000);
                                 if(poolType === 'global'){
@@ -60,7 +61,8 @@ PoolApi.prototype._update_pool_ports = function () {
                                         "</tr>"
                                     )
                                 }
-                            })
+                            });
+                            $('#pool-ports-table-'+poolType).append("</tbody>");
                         }
                     }
                 }
