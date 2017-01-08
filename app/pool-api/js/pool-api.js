@@ -25,17 +25,79 @@ $.ajax({
     }
 });
 
+var portColumns = [
+    {"data": "host.hostname"},
+    {"data": "port"},
+    {"data": "difficulty"},
+    {"data": "description"},
+    {"data": "miners"},
+    {"data": "host.blockID"},
+    {
+        "data": "host.blockIDTime",
+        "render": function (data, type, row) {
+            if (type === 'display' || type === 'filter') {
+                var d = new Date(data * 1000);
+                return d.toISOString();
+            }
+            return data;
+        }
+    }
+];
+
+var portColumnsGlobal = [
+    {"data": "host.hostname"},
+    {"data": "port"},
+    {"data": "pool_type"},
+    {"data": "difficulty"},
+    {"data": "description"},
+    {"data": "miners"},
+    {"data": "host.blockID"},
+    {
+        "data": "host.blockIDTime",
+        "render": function (data, type, row) {
+            if (type === 'display' || type === 'filter') {
+                var d = new Date(data * 1000);
+                return d.toISOString();
+            }
+            return data;
+        }
+    }
+];
+
 $(document).ready(function () {
     $("#home").load("/app/home.html");
     $("#pool-stats").load("/app/pool.html");
     $("#pool-getting-started").load("/app/gettingStarted.html");
-    $("#pool-ports-table-pps").DataTable();
-    $("#pool-ports-table-pplns").DataTable();
-    $("#pool-ports-table-solo").DataTable();
-    $("#pool-ports-table-global").DataTable();
+    $("#pool-ports-table-pps").DataTable({
+        processing: true,
+        ajax: "https://api.xmrpool.net/pool/ports/",
+        deferRender: true,
+        dataSrc: 'pps',
+        columns: portColumns
+    });
+    $("#pool-ports-table-pplns").DataTable({
+        processing: true,
+        ajax: "https://api.xmrpool.net/pool/ports/",
+        deferRender: true,
+        dataSrc: 'pplns',
+        columns: portColumns
+    });
+    $("#pool-ports-table-solo").DataTable({
+        processing: true,
+        ajax: "https://api.xmrpool.net/pool/ports/",
+        deferRender: true,
+        dataSrc: 'solo',
+        columns: portColumns
+    });
+    $("#pool-ports-table-global").DataTable({
+        processing: true,
+        ajax: "https://api.xmrpool.net/pool/ports/",
+        deferRender: true,
+        dataSrc: 'global',
+        columns: portColumnsGlobal
+    });
 
     setTimeout(refreshStats5Sec, 500);
-    setTimeout(refreshStats60Sec, 500);
 });
 
 
@@ -44,9 +106,6 @@ var refreshStats5Sec = function () {
     pool_api._update_pool_stats();
 };
 
-var refreshStats60Sec = function () {
-    pool_api._update_pool_ports();
-};
 
 setInterval(refreshStats5Sec, 5000);
 setInterval(refreshStats60Sec, 60000);
