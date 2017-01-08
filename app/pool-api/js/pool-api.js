@@ -75,6 +75,15 @@ $.ajax({
 $(document).ready(function () {
     $("#home").load("/app/home.html");
     $("#pool-stats").load("/app/pool.html");
+    $("#miner-stats").load("/app/miner.html", function() { 
+      var miner_address_interval = setInterval(function() {
+        miner_api.get_miner_address();
+        if (miner_api.miner_address.length) {
+          replaceFormWithAddress(miner_api.miner_address);
+        }
+      }, 1000);
+    });
+
     $("#pool-getting-started").load("/app/gettingStarted.html");
     setTimeout(initTables, 2000);
     setTimeout(refreshStats5Sec, 500);

@@ -28,11 +28,10 @@
                       src="/libs/node_modules/octicons/build/svg/eye.svg"/></span> Pool Stats</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link disabled" data-toggle="tab" href="#network-stats" role="tab"><span class="octicon"><img
-                      src="/libs/node_modules/octicons/build/svg/globe.svg"/></span> Network Stats</a>
+              <a class="nav-link disabled" data-toggle="tab" href="#network-stats" role="tab"><span class="octicon"><img src="/libs/node_modules/octicons/build/svg/globe.svg"/></span> Network Stats</a>
           </li>
 	  <li class="nav-item">
-	    <a class="nav-link disabled" data-toggle="tab" href="#miner-stats" role="tab">
+	    <a class="nav-link disabled" data-toggle="tab" href="#miner-stats" role="tab" id="miner-stats-link">
 	      <span class="octicon"><img src="/libs/node_modules/octicons/build/svg/organization.svg"/></span>
 	      Miner Stats
             </a>
@@ -71,11 +70,6 @@
 
 
         <div class="tab-pane fade" id="network-stats" role="tabpanel">
-            <div class="container">
-                <div class="row">
-                    <h1>Network Stats</h1>
-                </div>
-            </div>
         </div>
         <div class="tab-pane fade" id="miner-stats" role="tabpanel">
         </div>
@@ -105,7 +99,7 @@ $(document).ready(function() {
   if (address !== "") {
     replaceFormWithAddress(address);
   }
-  $("#address-form").submit(function( event ) {
+  $(document).on('submit', '#address-form', function( event ) {
     var address = $("#address-form-address-input").val();
     valid = miner_api.set_miner_address(address);
     if (valid) {
@@ -118,7 +112,12 @@ $(document).ready(function() {
     }
     event.preventDefault();
   });
-  $("#address-remove-cookie").click(function( event ) {
+  $(document).on('click', "#address-remove-cookie", function( event ) {
+    Cookies.remove('miner-address');
+    location.reload();
+  });
+
+  $(document).on('click', "#miner-stats-remove-cookie-link", function( event ) {
     Cookies.remove('miner-address');
     location.reload();
   });
@@ -133,9 +132,14 @@ var replaceFormWithAddress = function (address) {
   if ($("#address-form-remember-check").prop('checked')) {
     Cookies.set('miner-address', address);
   }
-  $("#address-form").html("<span class=\"navbar-text\">" + symbol + " " + address + " <a href=\"#\" id=\"address-remove-cookie\"> (logout)</a></span>");
+  $("#address-form").html('<span class="navbar-text">' + symbol + ' ' + address + ' <a href="#" id="address-remove-cookie"> (forget)</a></span>');
+  $("#miner-stats-link").removeClass("disabled");
+  $("#address-div").html("(" + symbol + " " + address + ") <h6><a href=\"#\" id=\"miner-stats-remove-cookie-link\"> (forget)</a></h6>");
+
 };
 
+var updateAddressFields = function () {
+};
 </script>
 </body>
 </html>

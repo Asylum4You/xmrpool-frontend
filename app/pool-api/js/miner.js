@@ -17,11 +17,10 @@ MinerApi.prototype.miner_address = "";
 MinerApi.prototype.miner_address_type = "";
 
 MinerApi.prototype.get_miner_address = function () {
-  if (this.miner_address !== "") {
-    return this.miner_address;
-  } else {
-    return Cookies.get('miner-address') || "";
+  if (this.miner_address === "") {
+    this.miner_address = Cookies.get('miner-address') || ""
   }
+  return this.miner_address;
 };
 
 MinerApi.prototype.set_miner_address = function (address) {
