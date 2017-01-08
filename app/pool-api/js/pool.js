@@ -12,7 +12,7 @@ PoolApi.prototype._update_pool_stats = function () {
 
                 if (html) {
                     $('#pool-last-block-found').html(html.pool_statistics.lastBlockFound);
-                    $('#pool-last-block-found-time').html(timeSince(new Date(html.pool_statistics.lastBlockFoundTime)) + " ago");
+                    $('#pool-last-block-found-time').html(timeSince(html.pool_statistics.lastBlockFoundTime*1000) + " ago");
                     $('#pool-total-blocks-found').html(html.pool_statistics.totalBlocksFound);
                     $('#pool-total-hash-rate').html(hashConversion(html.pool_statistics.hashRate));
                     $('#pool-total-miners').html(html.pool_statistics.miners);
