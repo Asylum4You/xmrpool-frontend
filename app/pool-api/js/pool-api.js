@@ -130,6 +130,7 @@ $(document).ready(function () {
                 {
                     "data": null,
                     "render": function (data, type, row) {
+                        console.log(JSON.stringify(row));
                         return Humanize.formatNumber((row[2] / row[3]) * 100, 2) + "%";
                     }
                 }
