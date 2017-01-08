@@ -44,8 +44,9 @@ var portColumns = [
         "data": "host.blockIDTime",
         "render": function (data, type, row) {
             if (type === 'display' || type === 'filter') {
-                var d = new Date(data * 1000);
-                return d.toString();
+                console.log(data);
+                var d = moment.utc(data * 1000);
+                return d.format('L') + " " + d.format('LTS')
             }
             return data;
         }
@@ -61,6 +62,7 @@ var initTables = function () {
         },
         "deferRender": true,
         "searching": false,
+        "info": false,
         "paging": false,
         "columns": portColumns
     });
@@ -72,6 +74,7 @@ var initTables = function () {
         },
         "deferRender": true,
         "searching": false,
+        "info": false,
         "paging": false,
         "columns": portColumns
     });
@@ -84,10 +87,10 @@ var initTables = function () {
         "deferRender": true,
         "searching": false,
         "paging": false,
+        "info": false,
         "columns": portColumns
     });
     $("#pool-ports-table-global").DataTable({
-        "paging": false,
         "processing": true,
         "ajax": {
             "url": "https://api.xmrpool.net/pool/ports",
@@ -96,6 +99,7 @@ var initTables = function () {
         "deferRender": true,
         "searching": false,
         "paging": false,
+        "info": false,
         "columns":[
             {"data": "host.hostname"},
             {"data": "port"},
@@ -109,7 +113,7 @@ var initTables = function () {
                 "render": function (data, type, row) {
                     if (type === 'display' || type === 'filter') {
                         var d = new Date(data * 1000);
-                        return d.toString();
+                        return d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + " UTC"
                     }
                     return data;
                 }
