@@ -76,10 +76,143 @@ $(document).ready(function () {
     $("#home").load("/app/home.html");
     $("#pool-stats").load("/app/pool.html");
     $("#pool-getting-started").load("/app/gettingStarted.html");
+    $("#pool-blocks").load("/app/blocks.html", function () {
+        var poolBlocksTable = $("#pool-blocks-table").DataTable({
+            "processing": true,
+            "ajax": {
+                "url": "https://api.xmrpool.net/pool/blocks"
+            },
+            "deferRender": true,
+            "columns": [
+                {
+                    "data": "height"
+                },
+                {
+                    "data": "diff",
+                    "render": function (data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            return Humanize.intComma(data);
+                        }
+                        return data;
+                    }
+                },
+                {
+                    "data": "shares",
+                    "render": function (data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            return Humanize.intComma(data);
+                        }
+                        return data;
+                    }
+                },
+                {
+                    "data": "hash",
+                    "render": function (data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            return "<a href='http://explore.moneroworld.com/block/" + data + "' target='_blank>" + data + "</a>";
+                        }
+                        return data;
+                    }
+                },
+                {
+                    "data": "ts",
+                    "render": function (data, type, row) {
+                        return timeRenderuSec(data, type, row);
+                    }
+                },
+                {
+                    "data": "pool_type",
+                    "render": function (data, type, row) {
+                        return data.toUpperCase();
+                    }
+                },
+                {
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return Humanize.formatNumber((row[2] / row[3]) * 100, 2) + "%";
+                    }
+                }
+            ]
+        });
+        setTimeout(function () {
+            poolBlocksTable.ajax.reload(null, false);
+        }, 120000);
+    });
+    $("#pool-payments").load("/app/payments.html", function () {
+        var poolPaymentsTable = $("#pool-payments-table").DataTable({
+            "processing": true,
+            "ajax": {
+                "url": "https://api.xmrpool.net/pool/payments"
+            },
+            "deferRender": true,
+            "columns": [
+                {
+                    "data": "ts",
+                    "render": function (data, type, row) {
+                        return timeRenderuSec(data, type, row);
+                    }
+                },
+                {
+                    "data": "hash",
+                    "render": function (data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            return "<a href='http://explore.moneroworld.com/tx/" + data + "' target='_blank>" + data + "</a>";
+                        }
+                        return data;
+                    }
+                },
+                {
+                    "data": "value",
+                    "render": function (data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            return (data / 1000000000).toString().trim('0') + " XMR";
+                        }
+                        return data;
+                    }
+                },
+                {
+                    "data": "fee",
+                    "render": function (data, type, row) {
+                        if (type === 'display' || type === 'filter') {
+                            return (data / 1000000000).toString().trim('0') + " XMR";
+                        }
+                        return data;
+                    }
+                },
+                {"data": "mixins"},
+                {"data": "payees"},
+                {
+                    "data": "pool_type",
+                    "render": function (data, type, row) {
+                        return data.toUpperCase();
+                    }
+                }
+            ]
+        });
+        setTimeout(function () {
+            poolPaymentsTable.ajax.reload(null, false);
+        }, 120000);
+    });
     setTimeout(initTables, 2000);
     setTimeout(refreshStats5Sec, 500);
     setTimeout(pageInit, 500)
 });
+
+function timeRender(data, type, row) {
+    if (type === 'display' || type === 'filter') {
+        var d = moment.utc(data * 1000);
+        return d.format('L') + " " + d.format('HH:mm:ss') + " UTC"
+    }
+    return data;
+}
+
+function timeRenderuSec(data, type, row) {
+    if (type === 'display' || type === 'filter') {
+        var d = moment.utc(data);
+        return d.format('L') + " " + d.format('HH:mm:ss') + " UTC"
+    }
+    return data;
+}
 
 var portColumns = [
     {"data": "host.hostname"},
@@ -91,11 +224,7 @@ var portColumns = [
     {
         "data": "host.blockIDTime",
         "render": function (data, type, row) {
-            if (type === 'display' || type === 'filter') {
-                var d = moment.utc(data * 1000);
-                return d.format('L') + " " + d.format('HH:mm:ss') + " UTC"
-            }
-            return data;
+            return timeRender(data, type, row);
         }
     }
 ];
@@ -158,18 +287,14 @@ var initTables = function () {
             {
                 "data": "host.blockIDTime",
                 "render": function (data, type, row) {
-                    if (type === 'display' || type === 'filter') {
-                        var d = moment.utc(data * 1000);
-                        return d.format('L') + " " + d.format('HH:mm:ss') + " UTC"
-                    }
-                    return data;
+                    return timeRender(data, type, row);
                 }
             }
         ]
     });
 };
 
-var pageInit = function(){
+var pageInit = function () {
     network_api._update_pool_info();
 };
 
