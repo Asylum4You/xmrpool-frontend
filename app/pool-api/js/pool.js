@@ -33,7 +33,7 @@ PoolApi.prototype._update_pool_ports = function () {
                 if (html) {
                     for (var poolType in html){
                         if (html.hasOwnProperty(poolType)){
-                            html.poolType.forEach(function(port){
+                            html[poolType].forEach(function(port){
                                 var blockTime = new Date(port.host.blockIDTime * 1000);
                                 $('#pool-ports-table-'+poolType).append(
                                     "<tr><td>" + port.host.hostname +
