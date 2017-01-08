@@ -20,5 +20,3 @@ PoolApi.prototype._update_pool_stats = function () {
             }
         )
 };
-
-
