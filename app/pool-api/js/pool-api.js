@@ -5,15 +5,41 @@
 var network_api = {};
 var pool_api = {};
 
-function hashConversion(hashes){
-    if(hashes > 1000000){
-        return Math.floor(hashes/1000000) + "." + (hashes % 1000000).toString().substring(0,1) + " MH/s"
+function hashConversion(hashes) {
+    if (hashes > 1000000) {
+        return Math.floor(hashes / 1000000) + "." + (hashes % 1000000).toString().substring(0, 1) + " MH/s"
     }
-    if(hashes > 1000){
-        return Math.floor(hashes/1000) + "." + (hashes % 1000).toString().substring(0,1) + " KH/s"
+    if (hashes > 1000) {
+        return Math.floor(hashes / 1000) + "." + (hashes % 1000).toString().substring(0, 1) + " KH/s"
     }
     return hashes + " H/s"
 }
+
+function timeSince(date) {
+    var seconds = Math.floor((new Date() - date) / 1000);
+    var interval = Math.floor(seconds / 31536000);
+    if (interval > 1) {
+        return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+}
+
 
 $.ajax({
     url: "app/pool-api/js/network.js",
@@ -109,7 +135,7 @@ var initTables = function () {
         "searching": false,
         "paging": false,
         "info": false,
-        "columns":[
+        "columns": [
             {"data": "host.hostname"},
             {"data": "port"},
             {"data": "pool_type"},
