@@ -24,13 +24,20 @@ $.ajax({
 $(document).ready(function () {
   $( "#home" ).load( "/app/home.html" );
   $( "#pool-stats" ).load( "/app/pool.html" );
-  setTimeout(refreshStats, 500);
+  $( "#pool-getting-started" ).load( "/app/gettingStarted.html" );
+  setTimeout(refreshStats5Sec, 500);
+  setTimeout(refreshStats60Sec, 500);
 });
 
 
-var refreshStats = function () {
+var refreshStats5Sec = function () {
   network_api._update_network_stats();
   pool_api._update_pool_stats();
 };
 
-setInterval(refreshStats, 5000);
+var refreshStats60Sec = function(){
+    pool_api._update_pool_ports();
+};
+
+setInterval(refreshStats5Sec, 5000);
+setInterval(refreshStats60Sec, 60000);
