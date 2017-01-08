@@ -44,13 +44,16 @@
       </ul>
       <div id="div-address-form" class="my-2 my-lg-0">
         <form id="address-form" class="form-inline my-2 my-lg-0">
-  	<input class="form control mr-sm-2" type="text" placeholder="Address" name="address">
-  	<div class="form-check mb-2 mr-sm-2 mb-sm-0">
+        <div class="form-group" id="address-input-group">
+          <input class="form control mr-sm-2" type="text" placeholder="Address" name="address" id="address-form-address-input">
+ 	  <div class="form-control-feedback" id="address-form-feedback"></div>
+        </div>
+	<div class="form-check mb-2 mr-sm-2 mb-sm-0">
   	  <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" name="remember" /> Remember
+              <input class="form-check-input" type="checkbox" checked name="remember" id="address-form-remember-check" /> Remember
             </label>
   	</div>
-  	<button class="btn btn-outline-primary my-2 my-sm-0" type="Submit">Go</button>
+  	<button class="btn btn-outline-primary my-2 my-sm-0" type="submit" id="address-form-button">Go</button>
         </form>
       </div>
     </div>
@@ -94,5 +97,45 @@
         integrity="sha256-Gn7MUQono8LUxTfRA0WZzJgTua52Udm1Ifrk5421zkA=" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://use.fontawesome.com/b197f3de00.js"></script>
+
+<script>
+$(document).ready(function() {
+  var address = Cookies.get('miner-address') || "";
+  if (address !== "") {
+    replaceFormWithAddress(address);
+  }
+  $("#address-form").submit(function( event ) {
+    var address = $("#address-form-address-input").val();
+    valid = miner_api.set_miner_address(address);
+    if (valid) {
+      replaceFormWithAddress(address);
+    } else {
+      $( "#address-input-group" ).attr("class", function( i, val ) {
+	return val + " has-danger";
+      });
+      $( "#address-form-feedback").html("Invalid Address");
+    }
+    event.preventDefault();
+  });
+  $("#address-remove-cookie").click(function( event ) {
+    Cookies.remove('miner-address');
+    location.reload();
+  });
+});
+
+var replaceFormWithAddress = function (address) {
+  if (miner_api.miner_address_type == "XMR") {
+    var symbol = "XMR";
+  } else { //miner_api.miner_address_type = "BTC"
+    var symbol = "<i class=\"fa fa-btc\" aria-hidden=\"true\"></i>";
+  }
+  if ($("#address-form-remember-check").prop('checked')) {
+    Cookies.set('miner-address', address);
+  }
+  $("#address-form").html("<span class=\"navbar-text\">" + symbol + " " + address + " <a href=\"#\" id=\"address-remove-cookie\"> (logout)</a></span>");
+};
+
+</script>
 </body>
 </html>
