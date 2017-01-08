@@ -4,6 +4,7 @@
 
 var network_api = {};
 var pool_api = {};
+var miner_api = {};
 
 function hashConversion(hashes) {
     if (hashes > 1000000) {
@@ -59,8 +60,17 @@ $.ajax({
             pool_api = new PoolApi();
         }, 100);
     }
-});
+})
 
+$.ajax({
+    url: "app/pool-api/js/miner.js",
+    dataType: "script",
+    success: function () {
+        setTimeout(function () {
+            miner_api = new MinerApi();
+        }, 100);
+    }
+})
 $(document).ready(function () {
     $("#home").load("/app/home.html");
     $("#pool-stats").load("/app/pool.html");
