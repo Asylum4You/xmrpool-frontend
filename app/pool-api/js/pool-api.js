@@ -136,7 +136,7 @@ $(document).ready(function () {
 
       setInterval(function () {
           minerPaymentsTable.ajax.reload(null, false);
-      }, 120000);
+      }, 10000);
     });
 
     $("#pool-getting-started").load("/app/gettingStarted.html");
@@ -202,7 +202,7 @@ $(document).ready(function () {
         });
         setInterval(function () {
             poolBlocksTable.ajax.reload(null, false);
-        }, 10000);
+        }, 120000);
     });
     $("#pool-payments").load("/app/payments.html", function () {
         var poolPaymentsTable = $("#pool-payments-table").DataTable({
