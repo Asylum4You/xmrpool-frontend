@@ -342,6 +342,6 @@ setTimeout(function() {
 
   miner_api._update_miner_global_stats(miner_api.miner_address);
   setTimeout(function() {
-    miner_api._update_miner_global_stats();
+    miner_api._update_miner_global_stats(miner_api.miner_address);
   }, 60000);
 }, 10000);
