@@ -46,10 +46,17 @@ MinerApi.prototype.set_miner_address = function (address) {
     return false;
   };
 
-  if (typeof(minerPaymentsTable) !== 'undefined') {
+  try {
+  if (minerPaymentsTable) {
+	console.log('Entered loop!');
+    minerPaymentsTable.ajax.url('https://api.xmrpool.net/miner/' + this.miner_address + '/payments');
     minerPaymentsTable.ajax.url('https://api.xmrpool.net/miner/' + this.miner_address + '/payments').load();
-  };
+  } else {
+    console.log('Didn\'t enter loop');
+  }
+  } catch(err) {};
 
+  replaceFormWithAddress(this.miner_address);
   this._update_miner_global_stats();
   return true;
 }; 
