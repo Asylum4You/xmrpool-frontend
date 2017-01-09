@@ -316,7 +316,7 @@ var initTables = function () {
 
 var pageInit = function () {
     network_api._update_pool_info();
-    refreshStats5Sec();
+    refreshStats15Sec();
     refreshStats30Sec();
     refreshStats60Sec();
 };
