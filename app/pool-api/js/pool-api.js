@@ -75,6 +75,7 @@ $.ajax({
     success: function () {
         setTimeout(function () {
             miner_api = new MinerApi();
+            miner_api._update_miner_global_stats(miner_api.miner_address);
         }, 100);
     }
 });
@@ -337,11 +338,3 @@ var refreshStats60Sec = function() {
 setInterval(refreshStats15Sec, 15000);
 setInterval(refreshStats30Sec, 30000);
 setInterval(refreshStats60Sec, 60000);
-
-setTimeout(function() {
-
-  miner_api._update_miner_global_stats(miner_api.miner_address);
-  setTimeout(function() {
-    miner_api._update_miner_global_stats(miner_api.miner_address);
-  }, 60000);
-}, 10000);
