@@ -1,6 +1,6 @@
 var MinerApi = function () {};
 
-MinerApi.prototype._update_miner_global_stats = function (miner_address) {
+MinerApi.prototype._get_miner_global_stats = function (miner_address) {
    $.ajax({
         type: "GET",
         url: "https://api.xmrpool.net/miner/" + miner_address + "/stats/",
@@ -15,8 +15,14 @@ MinerApi.prototype._update_miner_global_stats = function (miner_address) {
          $('#miner-hash-rate').html(hashConversion(html.hash));
          $('#miner-lastHash').html(timeSince(html.lastHash * 1000) + " ago");
        }
-       setTimeout(this._update_miner_global_stats(miner_address), 60000);
     });
+};
+
+
+MinerApi.prototype._update_miner_global_stats = function () {
+  this.get_miner_address()
+  this._get_miner_global_stats(this.miner_address);
+  setTimeout(this._get_miner_global_stats(this.miner_address), 60000);
 };
 
 MinerApi.prototype.miner_address = "";

@@ -216,7 +216,7 @@ $(document).ready(function () {
     });
     setTimeout(initTables, 2000);
     setTimeout(refreshStats15Sec, 500);
-    setTimeout(pageInit, 500)
+    setTimeout(pageInit, 500);
 });
 
 function timeRender(data, type) {
@@ -338,3 +338,9 @@ var refreshStats60Sec = function() {
 setInterval(refreshStats15Sec, 15000);
 setInterval(refreshStats30Sec, 30000);
 setInterval(refreshStats60Sec, 60000);
+
+
+setTimeout(function() {
+  miner_api.get_miner_address();
+  miner_api._update_miner_global_stats(miner_api.miner_address);
+}, 2000);
