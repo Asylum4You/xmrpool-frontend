@@ -45,7 +45,18 @@ MinerApi.prototype.set_miner_address = function (address) {
 MinerApi.prototype.refresh_five_seconds = function () {
   this.miner_address = this.get_miner_address();
   if (this.miner_address !== "") {
-    this._update_miner_global_stats(this.miner_address);
+  }
+};
+
+MinerApi.prototype.refresh_thirty_seconds = function () {
+  this.miner_address = this.get_miner_address();
+  if (this.miner_address !== "") {
+  }
+};
+
+MinerApi.prototype.refresh_sixty_seconds = function () {
+  this.miner_address = this.get_miner_address();
+  if (this.miner_address !== "") {
   }
 };
 
