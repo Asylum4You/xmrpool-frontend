@@ -93,7 +93,7 @@ $(document).ready(function () {
       var minerPaymentsTable = $("#miner-payments-table").DataTable({
         "processing": true,
         "ajax": {
-          "url": "https://api.xmrpool.net/miner/" + address + "/payments",
+          "url": "https://api.xmrpool.net/miner/" + miner_api.miner_address + "/payments",
           "dataSrc": ""
         },
 	"order": [[ 1, 'desc' ]],
@@ -106,7 +106,7 @@ $(document).ready(function () {
              "data": "ts",
 	     "render": function (data, type) {
 		  if (type === 'display' || type === 'filter') {
-		      return Moment.unix(data);
+		      return moment.unix(data);
 		  }
 		  return data;
 	     }
@@ -202,7 +202,7 @@ $(document).ready(function () {
         });
         setInterval(function () {
             poolBlocksTable.ajax.reload(null, false);
-        }, 120000);
+        }, 10000);
     });
     $("#pool-payments").load("/app/payments.html", function () {
         var poolPaymentsTable = $("#pool-payments-table").DataTable({
