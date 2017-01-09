@@ -9,8 +9,8 @@ MinerApi.prototype._update_miner_global_stats = function (miner_address) {
     }).done(function (html) {
        if (html) {
          
-         $('#miner-amt-due').html(html.amtDue / 1000000000000);
-         $('#miner-total-paid').html(html.amtPaid / 1000000000000);
+         $('#miner-amt-due').html(html.amtDue / 1000000000000 + " XMR");
+         $('#miner-total-paid').html(html.amtPaid / 1000000000000 + " XMR");
          $('#miner-total-hashes').html(html.totalHashes);
          $('#miner-hash-rate').html(hashConversion(html.hash));
          $('#miner-lastHash').html(timeSince(html.lastHash * 1000) + " ago");

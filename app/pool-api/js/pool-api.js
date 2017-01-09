@@ -324,7 +324,6 @@ var pageInit = function () {
 var refreshStats5Sec = function () {
     network_api._update_network_stats();
     pool_api._update_pool_stats();
-    miner_api.refresh_five_seconds();
 };
 
 var refreshStats30Sec = function() {
@@ -340,7 +339,8 @@ setInterval(refreshStats30Sec, 30000);
 setInterval(refreshStats60Sec, 60000);
 
 setTimeout(function() {
-  miner_api._update_miner_global_stats();
+
+  miner_api._update_miner_global_stats(miner_api.miner_address);
   setTimeout(function() {
     miner_api._update_miner_global_stats();
   }, 60000);
