@@ -50,16 +50,18 @@ MinerApi.prototype.refresh_five_seconds = function () {
 };
 
 MinerApi.prototype.is_valid_xmr_address = function (address) {
-  if (address.length == 95 && address.slice(0, 1) == '4') {
+  address = address.split('.');
+  if ((address[0].length == 95 || address[0].length == 106) && address[0].slice(0, 1) == '4') {
     return true;
   } else { return false; }
 };
 
 MinerApi.prototype.is_valid_btc_address = function (address) {
-  if (address.length >= 26 && address.length <= 35 && 
-		  (address.slice(0, 1) == '1' ||
-		   address.slice(0, 1) == '3' ||
-		   address.slice(0, 1) == '5')
+  address = address.split('.');
+  if (address[0].length >= 26 && address[0].length <= 35 && 
+		  (address[0].slice(0, 1) == '1' ||
+		   address[0].slice(0, 1) == '3' ||
+		   address[0].slice(0, 1) == '5')
       ) {
     return true;
   } else { return false; }
