@@ -80,14 +80,18 @@ $.ajax({
     }
 });
 
-$(document).ready(function () {
-    $("#home").load("/app/home.html");
-    $("#pool-stats").load("/app/pool.html");
-    $("#miner-stats").load("/app/miner.html", function() { 
+
+var minerPaymentsTableInterval = {};
+function loadMinerStatsTable() {
+      clearInterval(minerPaymentsTableInterval);
+      var minerPaymentsTableUrl = "https://api.xmrpool.net/miner/x/payments";
+      if ((miner_api.miner_address !== "") && (typeof(miner_api) !== 'undefined')) {
+        var minerPaymentsTableUrl = "https://api.xmrpool.net/miner/" + miner_api.miner_address + "/payments";
+      }
       var minerPaymentsTable = $("#miner-payments-table").DataTable({
         "processing": true,
         "ajax": {
-          "url": "https://api.xmrpool.net/miner/" + miner_api.miner_address + "/payments",
+          "url": minerPaymentsTableUrl, 
           "dataSrc": ""
         },
 	"order": [[ 1, 'desc' ]],
@@ -124,16 +128,18 @@ $(document).ready(function () {
 	     "data": "mixin"
 	   }
       ]});
-      setTimeout(function () {
-	  if (miner_api.miner_address !== "") {
-  	    minerPaymentsTable.ajax.url( 'https://api.xmrpool.net/miner/' + miner_api.miner_address + '/payments' ).load();
-	  }
-      },2000);
-      setInterval(function () {
+}
+      minerPaymentsTableInterval = setInterval(function () {
 	  if (miner_api.miner_address !== "") {
             minerPaymentsTable.ajax.reload(null, false);
 	  }
       }, 10000);
+
+$(document).ready(function () {
+    $("#home").load("/app/home.html");
+    $("#pool-stats").load("/app/pool.html");
+    $("#miner-stats").load("/app/miner.html", function() { 
+      loadMinerStatsTable();
     });
 
     $("#pool-getting-started").load("/app/gettingStarted.html");
