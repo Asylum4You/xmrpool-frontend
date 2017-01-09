@@ -214,7 +214,7 @@ $(document).ready(function () {
         }, 120000);
     });
     setTimeout(initTables, 2000);
-    setTimeout(refreshStats5Sec, 500);
+    setTimeout(refreshStats15Sec, 500);
     setTimeout(pageInit, 500)
 });
 
