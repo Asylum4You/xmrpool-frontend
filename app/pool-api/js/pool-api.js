@@ -75,7 +75,7 @@ $.ajax({
     success: function () {
         setTimeout(function () {
             miner_api = new MinerApi();
-            miner_api._update_miner_global_stats(miner_api.miner_address);
+            miner_api._update_miner_global_stats();
         }, 100);
     }
 });
@@ -85,7 +85,7 @@ var minerPaymentsTableInterval = {};
 function loadMinerStatsTable() {
       clearInterval(minerPaymentsTableInterval);
       var minerPaymentsTableUrl = "https://api.xmrpool.net/miner/x/payments";
-      if ((miner_api.miner_address !== "") && (typeof(miner_api) !== 'undefined')) {
+      if ((typeof(miner_api) !== 'undefined') && (typeof(miner_api.miner_address) === 'string') && (miner_api.miner_address != "")) {
         var minerPaymentsTableUrl = "https://api.xmrpool.net/miner/" + miner_api.miner_address + "/payments";
       }
       var minerPaymentsTable = $("#miner-payments-table").DataTable({

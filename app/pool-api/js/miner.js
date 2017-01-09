@@ -20,9 +20,11 @@ MinerApi.prototype._get_miner_global_stats = function (miner_address) {
 
 
 MinerApi.prototype._update_miner_global_stats = function () {
-  this.get_miner_address()
-  this._get_miner_global_stats(this.miner_address);
-  setTimeout(this._get_miner_global_stats(this.miner_address), 60000);
+  this.get_miner_address();
+  if (this.miner_address != "") {
+    this._get_miner_global_stats(this.miner_address);
+    setTimeout(this._get_miner_global_stats(this.miner_address), 60000);
+  };
 };
 
 MinerApi.prototype.miner_address = "";
@@ -80,14 +82,22 @@ MinerApi.prototype.refresh_sixty_seconds = function () {
 };
 
 MinerApi.prototype.is_valid_xmr_address = function (address) {
-  address = address.split('.');
+  if (typeof(address) === 'string') {
+    address = address.split('.');
+  } else {
+    return false;
+  };
   if ((address[0].length == 95 || address[0].length == 106) && address[0].slice(0, 1) == '4') {
     return true;
   } else { return false; }
 };
 
 MinerApi.prototype.is_valid_btc_address = function (address) {
-  address = address.split('.');
+  if (typeof(address) === 'string') {
+    address = address.split('.');
+  } else {
+    return false;
+  }
   if (address[0].length >= 26 && address[0].length <= 35 && 
 		  (address[0].slice(0, 1) == '1' ||
 		   address[0].slice(0, 1) == '3' ||
