@@ -316,11 +316,32 @@ var initTables = function () {
 
 var pageInit = function () {
     network_api._update_pool_info();
+    refreshStats15Sec();
+    refreshStats30Sec();
+    refreshStats60Sec();
 };
 
-var refreshStats5Sec = function () {
+var refreshStats15Sec = function () {
     network_api._update_network_stats();
     pool_api._update_pool_stats();
 };
 
-setInterval(refreshStats5Sec, 5000);
+var refreshStats30Sec = function() {
+    miner_api.refresh_thirty_seconds();
+};
+
+var refreshStats60Sec = function() {
+    miner_api.refresh_sixty_seconds();
+};
+
+setInterval(refreshStats15Sec, 15000);
+setInterval(refreshStats30Sec, 30000);
+setInterval(refreshStats60Sec, 60000);
+
+setTimeout(function() {
+
+  miner_api._update_miner_global_stats(miner_api.miner_address);
+  setTimeout(function() {
+    miner_api._update_miner_global_stats(miner_api.miner_address);
+  }, 60000);
+}, 10000);
