@@ -133,7 +133,9 @@ $(document).ready(function () {
 	     "data": "mixin"
 	   }
       ]});
-
+      setTimeout(function () {
+	  minerPaymentsTable.ajax.url( 'https://api.xmrpool.net/miner/' + miner_api.miner_address + '/payments' ).load();
+      },2000);
       setInterval(function () {
           minerPaymentsTable.ajax.reload(null, false);
       }, 10000);

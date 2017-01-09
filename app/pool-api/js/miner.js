@@ -39,14 +39,17 @@ MinerApi.prototype.set_miner_address = function (address) {
   if (this.is_valid_btc_address(address)) {
     this.miner_address = address;
     this.miner_address_type = "BTC";
-    return true;
   } else if (this.is_valid_xmr_address(address)) {
     this.miner_address = address;
     this.miner_address_type = "XMR";
-    return true;
   } else {
     return false;
-  }
+  };
+
+  if (typeof(minerPaymentsTable) !== 'undefined') {
+    minerPaymentsTable.ajax.url('https://api.xmrpool.net/miner/' + this.miner_address + '/payments').load();
+  };
+  return true;
 }; 
 
 MinerApi.prototype.refresh_five_seconds = function () {
