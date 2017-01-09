@@ -90,6 +90,53 @@ $(document).ready(function () {
           replaceFormWithAddress(miner_api.miner_address);
         }
       }, 1000);
+      var minerPaymentsTable = $("#miner-payments-table").DataTable({
+        "processing": true,
+        "ajax": {
+          "url": "https://api.xmrpool.net/miner/" + address + "/payments",
+          "dataSrc": ""
+        },
+	"order": [[ 1, 'desc' ]],
+	"deferRender": true,
+	"columns": [
+	   {
+             "data": "pt",
+	   },
+	   {
+             "data": "ts",
+	     "render": function (data, type) {
+		  if (type === 'display' || type === 'filter') {
+		      return Moment.unix(data);
+		  }
+		  return data;
+	     }
+	   },
+	   {
+	     "data": "amount",
+	     "render": function (data, type) {
+                  if (type === 'display' || type === 'filter') {
+	              return (data / 1000000000000);
+		  }
+		  return data;
+	     }
+	   },
+	   {
+	     "data": "txnHash",
+	     "render": function (data, type) {
+		  if (type === 'display' || type === 'filter') {
+                      return '<a href="http://chainradar.com/xmr/transaction/' + data + '" target="_blank">' + data.substring(0, 13) + '...</a>';
+		  }
+		  return data;
+	     }
+	   },
+	   {
+	     "data": "mixin"
+	   }
+      ]});
+
+      setInterval(function () {
+          minerPaymentsTable.ajax.reload(null, false);
+      }, 120000);
     });
 
     $("#pool-getting-started").load("/app/gettingStarted.html");
@@ -153,7 +200,7 @@ $(document).ready(function () {
                 }
             ]
         });
-        setTimeout(function () {
+        setInterval(function () {
             poolBlocksTable.ajax.reload(null, false);
         }, 120000);
     });
