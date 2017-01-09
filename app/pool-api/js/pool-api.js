@@ -16,6 +16,13 @@ function hashConversion(hashes) {
     return hashes + " H/s"
 }
 
+function truncateAddress(string) {
+  if (string.length > 40)
+    return string.substring(0,40)+'...';
+  else
+    return string;
+};
+
 function timeSince(date) {
     var seconds = Math.floor((new Date() - date) / 1000);
     var interval = Math.floor(seconds / 31536000);

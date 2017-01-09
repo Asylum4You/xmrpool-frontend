@@ -18,7 +18,7 @@ MinerApi.prototype.miner_address_type = "";
 
 MinerApi.prototype.get_miner_address = function () {
   if (this.miner_address === "") {
-    this.miner_address = Cookies.get('miner-address') || ""
+    this.set_miner_address(Cookies.get('miner-address'));
   }
   return this.miner_address;
 };
