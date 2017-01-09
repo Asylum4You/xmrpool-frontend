@@ -52,7 +52,7 @@
       </ul>
       <div id="div-address-form" class="my-2 my-lg-0">
         <form id="address-form" class="form-inline my-2 my-lg-0">
-  	<input class="form control mr-sm-2" type="text" placeholder="Address" name="address">
+  	<input class="form control mr-sm-2" type="text" placeholder="Address" name="address" id="address-form-address-input">
   	<div class="form-check mb-2 mr-sm-2 mb-sm-0">
   	  <label class="form-check-label">
               <input class="form-check-input" type="checkbox" checked name="remember" id="address-form-remember-check" /> Remember
@@ -112,7 +112,7 @@ $(document).ready(function() {
     replaceFormWithAddress(address);
   }
   $(document).on('submit', '#address-form', function( event ) {
-    var address = $("#address-form-address-input").val();
+    var address = document.getElementById('address-form-address-input').value;
     valid = miner_api.set_miner_address(address);
     if (valid) {
       replaceFormWithAddress(address);
