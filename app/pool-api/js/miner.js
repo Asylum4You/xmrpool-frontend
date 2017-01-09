@@ -1,4 +1,4 @@
-var MinerApi = function () {}; 
+var MinerApi = function () {};
 
 MinerApi.prototype._update_miner_global_stats = function (miner_address) {
    $.ajax({
@@ -15,6 +15,7 @@ MinerApi.prototype._update_miner_global_stats = function (miner_address) {
          $('#miner-hash-rate').html(hashConversion(html.hash));
          $('#miner-lastHash').html(timeSince(html.lastHash * 1000) + " ago");
        }
+       setTimeout(this._update_miner_global_stats(miner_address), 60000);
     });
 };
 
