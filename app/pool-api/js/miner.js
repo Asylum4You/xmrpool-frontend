@@ -49,6 +49,8 @@ MinerApi.prototype.set_miner_address = function (address) {
   if (typeof(minerPaymentsTable) !== 'undefined') {
     minerPaymentsTable.ajax.url('https://api.xmrpool.net/miner/' + this.miner_address + '/payments').load();
   };
+
+  this._update_miner_global_stats();
   return true;
 }; 
 

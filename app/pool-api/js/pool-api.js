@@ -104,12 +104,9 @@ $(document).ready(function () {
 	   },
 	   {
              "data": "ts",
-	     "render": function (data, type) {
-		  if (type === 'display' || type === 'filter') {
-		      return moment.unix(data);
-		  }
-		  return data;
-	     }
+	     "render": function (data, type, row) {
+		  return timeRender(data, type, row);
+             }
 	   },
 	   {
 	     "data": "amount",
@@ -124,7 +121,7 @@ $(document).ready(function () {
 	     "data": "txnHash",
 	     "render": function (data, type) {
 		  if (type === 'display' || type === 'filter') {
-                      return '<a href="http://chainradar.com/xmr/transaction/' + data + '" target="_blank">' + data.substring(0, 13) + '...</a>';
+                      return '<a href="http://chainradar.com/xmr/transaction/' + data + '" target="_blank">' + data + '</a>';
 		  }
 		  return data;
 	     }
