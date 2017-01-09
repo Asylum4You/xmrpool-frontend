@@ -7,10 +7,15 @@ MinerApi.prototype._update_miner_global_stats = function (miner_address) {
         cache: true,
         dataType: 'json'
     }).done(function (html) {
-            if (html) {
-            }
-        }
-    )
+       if (html) {
+         
+         $('#miner-amt-due').html(html.amtDue / 1000000000000);
+         $('#miner-total-paid').html(html.amtPaid / 1000000000000);
+         $('#miner-total-hashes').html(html.totalHashes);
+         $('#miner-hash-rate').html(hashConversion(html.hash));
+         $('#miner-lastHash').html(timeSince(html.lastHash * 1000) + " ago");
+       }
+    });
 };
 
 MinerApi.prototype.miner_address = "";

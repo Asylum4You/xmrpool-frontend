@@ -321,6 +321,7 @@ var pageInit = function () {
 var refreshStats5Sec = function () {
     network_api._update_network_stats();
     pool_api._update_pool_stats();
+    miner_api.refresh_five_seconds();
 };
 
 setInterval(refreshStats5Sec, 5000);
