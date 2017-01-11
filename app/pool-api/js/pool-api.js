@@ -372,6 +372,10 @@ var pageInit = function () {
     refreshStats60Sec();
 };
 
+var refreshStats3Sec = function () {
+    network_api.update_home_page();
+};
+
 var refreshStats15Sec = function () {
     network_api._update_network_stats();
     pool_api._update_pool_stats();
@@ -389,7 +393,7 @@ var refreshStats60Sec = function() {
 setInterval(refreshStats15Sec, 15000);
 setInterval(refreshStats30Sec, 30000);
 setInterval(refreshStats60Sec, 60000);
-
+setInterval(refreshStats3Sec, 3000);
 
 setTimeout(function() {
   miner_api.get_miner_address();
