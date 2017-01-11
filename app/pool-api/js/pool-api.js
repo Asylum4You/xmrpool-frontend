@@ -2,10 +2,6 @@
 // Timers for auto-refresh loop
 //
 
-var network_api = {};
-var pool_api = {};
-var miner_api = {};
-
 function hashConversion(hashes) {
     if (hashes > 1000000) {
         return Math.floor(hashes / 1000000) + "." + (hashes % 1000000).toString().substring(0, 1) + " MH/s"
@@ -374,6 +370,7 @@ var pageInit = function () {
 
 var refreshStats3Sec = function () {
     network_api.update_home_page();
+    pool_api.update_home_page();
 };
 
 var refreshStats15Sec = function () {
