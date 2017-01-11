@@ -379,6 +379,7 @@ var refreshStats15Sec = function () {
 
 var refreshStats30Sec = function() {
     miner_api.refresh_thirty_seconds();
+    miner_api._update_miner_global_stats();
 };
 
 var refreshStats60Sec = function() {
